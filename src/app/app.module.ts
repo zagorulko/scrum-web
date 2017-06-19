@@ -2,23 +2,33 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
+import { SharedModule } from './shared/shared.module';
+
+import { ApiService } from './api.service';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { CoreModule } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
+import { AuthGuard } from './auth.guard';
+import { AuthService } from './auth.service';
+import { LoginComponent } from './login.component';
+import { PageNotFoundComponent } from './not-found.component';
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,
-    CoreModule,
     AppRoutingModule
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    PageNotFoundComponent
   ],
-  providers: [],
+  providers: [
+    ApiService,
+    AuthGuard,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

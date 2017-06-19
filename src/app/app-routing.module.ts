@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from './core/auth.guard';
-
-import { LoginComponent } from './core/login.component';
-import { PageNotFoundComponent } from './core/not-found.component';
+import { AuthGuard } from './auth.guard';
+import { LoginComponent } from './login.component';
+import { PageNotFoundComponent } from './not-found.component';
 
 const appRoutes: Routes = [
   {
@@ -12,11 +11,16 @@ const appRoutes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'home',
-    loadChildren: 'app/home/home.module#HomeModule',
+    path: 'projects',
+    loadChildren: 'app/projects/projects.module#ProjectsModule',
     canLoad: [AuthGuard]
   },
-  { path: '',   redirectTo: '/home', pathMatch: 'full' },
+  {
+    path: 'settings',
+    loadChildren: 'app/settings/settings.module#SettingsModule',
+    canLoad: [AuthGuard]
+  },
+  { path: '', redirectTo: '/projects', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

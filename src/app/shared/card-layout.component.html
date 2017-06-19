@@ -1,0 +1,12 @@
+<td-layout>
+  <td-navigation-drawer
+      [name]="authService.user.username + ' <' + authService.user.fullName + '>'"
+      [email]="authService.user.email">
+    <app-menu></app-menu>
+  </td-navigation-drawer>
+  <td-layout-nav [toolbarTitle]="toolbarTitle">
+    <td-layout-card-over cardWidth="70" color="primary" [cardTitle]="cardTitle" [cardSubtitle]="cardSubtitle">
+      <ng-content></ng-content>
+    </td-layout-card-over>
+  </td-layout-nav>
+</td-layout>

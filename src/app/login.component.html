@@ -1,0 +1,27 @@
+<div layout="column" layout-align="center center" flex style="height: 100%">
+  <md-card style="width: 600px">
+    <md-card-title class="push-bottom-none">
+      <span class="md-title">Welcome to Scrum Web!</span>
+    </md-card-title>
+    <md-card-content class="push-bottom-none">
+      <div layout="row">
+        <md-input-container flex>
+          <input mdInput placeholder="Username" [(ngModel)]="username" />
+        </md-input-container>
+      </div>
+      <div layout="row" class="push-top-sm">
+        <md-input-container flex>
+          <input mdInput placeholder="Password" type="password" [(ngModel)]="password" />
+        </md-input-container>
+      </div>
+      <div layout="row" class="push-top-sm" *ngIf="errorMessage">
+        <md-error>ERROR: {{errorMessage}}</md-error>
+      </div>
+    </md-card-content>
+    <md-card-actions>
+      <div layout="row">
+        <button flex md-raised-button color="accent" (click)="login()" class="text-upper" [disabled]="!username || !password">Sign In</button>
+      </div>
+    </md-card-actions>
+  </md-card>
+</div>
