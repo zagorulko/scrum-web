@@ -15,6 +15,7 @@ export class Project {
 
 export class Sprint {
   id: number;
+  number: number;
   startDate: Date;
   endDate: Date;
   goal: string;
@@ -51,13 +52,25 @@ export class ProjectService {
   fetchProjectSprints(projectAlias): Observable<Sprint[]> {
     return this.apiService
       .get('/projects/' + projectAlias + "/sprints")
-      .map(response => response.json());
+      .map(response => response.json()['sprints'])
+      .map(sprints => {
+        for (let i = 0; i < sprints.length; i++) {
+          sprints[i].startDate = new Date(sprints[i].startDate);
+          sprints[i].endDate = new Date(sprints[i].endDate);
+        }
+        sprints.sort((a: Sprint, b: Sprint) =>
+            b.startDate.getTime() - a.startDate.getTime()
+        )
+        for (let i = 0; i < sprints.length; i++)
+          sprints[i].number = sprints.length - i;
+        return sprints;
+      });
   }
 
   fetchProjectTasks(projectAlias): Observable<Task[]> {
     return this.apiService
       .get('/projects/' + projectAlias + "/tasks")
-      .map(response => response.json());
+      .map(response => response.json()['tasks']);
   }
 
   fetchSprint(id): Observable<Sprint> {

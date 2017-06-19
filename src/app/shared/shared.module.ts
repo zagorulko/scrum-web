@@ -19,7 +19,8 @@ import {
   MdDialogModule,
   MdMenuModule,
   MdSnackBarModule,
-  MdGridListModule
+  MdGridListModule,
+  MdSelectModule
 } from '@angular/material';
 
 import {
@@ -57,6 +58,7 @@ import { SidenavLayoutComponent } from './sidenav-layout.component';
     MdMenuModule,
     MdSnackBarModule,
     MdGridListModule,
+    MdSelectModule,
     CovalentCommonModule,
     CovalentLayoutModule,
     CovalentMediaModule,
@@ -84,6 +86,7 @@ import { SidenavLayoutComponent } from './sidenav-layout.component';
     MdMenuModule,
     MdSnackBarModule,
     MdGridListModule,
+    MdSelectModule,
     CovalentCommonModule,
     CovalentLayoutModule,
     CovalentMediaModule,

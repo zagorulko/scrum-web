@@ -1,5 +1,11 @@
 <md-nav-list>
-  <a md-list-item routerLink="/projects"><md-icon>folder</md-icon>Projects</a>
-  <a md-list-item routerLink="/settings"><md-icon>settings</md-icon>Settings</a>
-  <a md-list-item (click)="authService.logout()"><md-icon>exit_to_app</md-icon>Sign out</a>
+  <a md-list-item routerLink="/projects" routerLinkActive="md-list-item-active">
+    <md-icon>folder</md-icon>Projects
+  </a>
+  <a md-list-item routerLink="/settings" routerLinkActive="md-list-item-active">
+    <md-icon>settings</md-icon>Settings
+  </a>
+  <a md-list-item (click)="authService.logout()">
+    <md-icon>exit_to_app</md-icon>Sign out
+  </a>
 </md-nav-list>

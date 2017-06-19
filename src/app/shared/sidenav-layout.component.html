@@ -6,34 +6,18 @@
   </td-navigation-drawer>
   <td-layout-nav-list [sidenavWidth]="'257px'">
     <div td-sidenav-toolbar-content layout="row" flex>
-      <div>{{toolbarTitle}}</div>
+      <div *ngIf="toolbarTitle">{{toolbarTitle}}</div>
       <span flex></span>
     </div>
     <md-nav-list td-sidenav-content>
       <ng-content select="[app-layout-sidenav]"></ng-content>
-      <a md-list-item><md-icon md-list-icon>sort</md-icon> All Unreads</a>
-      <a md-list-item><md-icon md-list-icon>chat</md-icon> All Threads</a>
-      <md-divider></md-divider>
-      <h3 md-subheader>STARRED</h3>
-      <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1]">
-        <a md-list-item><md-icon md-list-icon>#</md-icon> starred-channel-{{i}}</a>
-      </ng-template>
-      <md-divider></md-divider>
-      <h3 md-subheader>CHANNELS (5)</h3>
-      <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3]">
-        <a md-list-item><md-icon md-list-icon>#</md-icon> channel-name-{{i}}</a>
-      </ng-template>
-      <md-divider></md-divider>
-      <h3 md-subheader>DIRECT MESSAGES</h3>
-      <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3,4,5]">
-        <a md-list-item><md-icon color="accent" md-list-icon>lens</md-icon> username{{i}}</a>
-      </ng-template>
     </md-nav-list>
     <div td-toolbar-content layout="row" layout-align="start center" flex>
       <div>
         <div>{{toolbarSubtitle}}</div>
       </div>
       <span flex></span>
+      <ng-content select="[app-layout-toolbar-actions]"></ng-content>
     </div>
     <md-sidenav-container fullscreen>
       <ng-content select="[app-layout-content]"></ng-content>

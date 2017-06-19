@@ -1,0 +1,34 @@
+<div layout="column" layout-fill class="md-content">
+  <md-toolbar class="md-whiteframe-z1">
+    <h6><md-checkbox [(ngModel)]="assignedToMeOnly">Assigned to me</md-checkbox></h6>
+    <h6 class="push-left"><md-checkbox [(ngModel)]="currentSprintOnly">Current sprint</md-checkbox></h6>
+    <h6 class="push-left"><md-checkbox [(ngModel)]="uncompletedOnly">Uncompleted</md-checkbox></h6>
+    <h6 class="push-left">
+      <md-select [(ngModel)]="orderBy">
+        <md-option value="date">By date</md-option>
+        <md-option value="priority">By priority</md-option>
+        <md-option value="title">By title</md-option>
+      </md-select>
+    </h6>
+    <h6 class="push-left-sm">
+      <a md-icon-button [color]="reverseOrder ? 'accent' : ''">
+        <md-icon (click)="reverseOrder=!reverseOrder">sort</md-icon>
+      </a>
+    </h6>
+  </md-toolbar>
+  <div class="md-content" flex cdkScrollable>
+    <md-card class="push-sm">
+      <md-list>
+        <div *ngFor="let task of tasks; let last = last">
+          <md-list-item class="cursor-pointer">
+            <h3 md-line>{{task.title}}</h3>
+          </md-list-item>
+        <md-divider *ngIf="!last"></md-divider>
+        </div>
+      </md-list>
+    </md-card>
+  </div>
+  <a md-fab color="accent" class="mat-fab-bottom-right fixed fab-pad push" *ngIf="!loading">
+    <md-icon>add</md-icon>
+  </a>
+</div>

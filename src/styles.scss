@@ -1,10 +1,20 @@
+@import '~@angular/material/theming';
 @import '~@covalent/core/common/platform.css';
 // @import '~@covalent/core/theming/prebuilt/blue-grey-deep-orange.css';
 @import '~@covalent/core/theming/prebuilt/teal-orange.css';
+// @import '~@covalent/core/theming/prebuilt/blue-orange';
 
 html, body {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+.md-list-item-active {
+  color: tomato !important;
+}
+
+.md-list-item-active md-icon {
+  color: tomato !important;
 }

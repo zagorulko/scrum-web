@@ -15,12 +15,8 @@ export class ProjectListComponent {
     this.loading = true;
     this.projectService
       .fetchProjectList()
+      .map(projects => this.projects = projects)
       .finally(() => this.loading = false)
-      .subscribe(
-        projects => this.projects = projects,
-        error => {
-          // TODO
-        }
-      );
+      .subscribe();
   }
 }

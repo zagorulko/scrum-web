@@ -3,20 +3,19 @@
        layout="column" layout-align="center center" flex style="height: 100%">
     <md-spinner></md-spinner>
   </div>
-  <md-card app-layout-content *ngIf="!loading" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
-     <md-list>
-       <div *ngFor="let project of projects; let last = last">
-         <md-list-item class="cursor-pointer" [routerLink]="['/projects', project.alias]">
-           <h2 md-line>#{{project.alias}}</h2>
-           <h3 md-line>{{project.name}}</h3>
-           <p md-line>
-             <span class="text-wrap">
-               {{project.description}}
-             </span>
-           </p>
-         </md-list-item>
-         <md-divider *ngIf="!last"></md-divider>
-       </div>
-     </md-list>
-   </md-card>
+  <md-card app-layout-content *ngIf="!loading" class="push-sm">
+    <md-list>
+      <div *ngFor="let project of projects; let last = last">
+        <md-list-item [routerLink]="['/projects', project.alias]" class="cursor-pointer">
+          <h2 md-line>{{project.name}}</h2>
+          <p md-line>
+            <span class="text-wrap">
+              {{project.description}}
+            </span>
+          </p>
+        </md-list-item>
+      <md-divider *ngIf="!last"></md-divider>
+      </div>
+    </md-list>
+  </md-card>
 </app-basic-layout>

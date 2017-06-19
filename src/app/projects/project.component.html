@@ -1,0 +1,37 @@
+<app-sidenav-layout toolbarTitle="Project" [toolbarSubtitle]="!loading ? project.name : ''">
+  <div app-layout-content *ngIf="loading"
+       layout="column" layout-align="center center" flex style="height: 100%">
+    <md-spinner></md-spinner>
+  </div>
+  <div app-layout-toolbar-actions *ngIf="!loading">
+    <button md-icon-button routerLink="/projects">
+      <md-icon>arrow_back</md-icon>
+    </button>
+    <button md-icon-button (click)="refresh()">
+      <md-icon>refresh</md-icon>
+    </button>
+  </div>
+  <div app-layout-sidenav *ngIf="!loading">
+    <a md-list-item
+        [routerLink]="['/projects', project.alias, 'backlog']"
+        routerLinkActive="md-list-item-active">
+      <md-icon md-list-icon>inbox</md-icon>Backlog
+    </a>
+    <a md-list-item
+        [routerLink]="['/projects', project.alias, 'members']"
+        routerLinkActive="md-list-item-active">
+      <md-icon md-list-icon>people</md-icon>Members
+    </a>
+    <md-divider></md-divider>
+    <h3 md-subheader>SPRINTS ({{sprints.length}})</h3>
+    <a md-list-item *ngFor="let sprint of sprints; let i = index"
+        [routerLink]="['/projects', project.alias, 'sprints', sprint.id]"
+        routerLinkActive="md-list-item-active">
+      <md-icon md-list-icon>#</md-icon>
+      <h3 md-line>Sprint #{{sprint.number}}</h3>
+      <p md-line>{{sprint.startDate | date}}</p>
+    </a>
+  </div>
+  <router-outlet app-layout-content *ngIf="!loading">
+  </router-outlet>
+</app-sidenav-layout>
