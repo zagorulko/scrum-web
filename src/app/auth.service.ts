@@ -18,7 +18,7 @@ export class AuthService {
   redirectUrl: string;
 
   constructor(private http: Http, private router: Router,
-              private apiService: ApiService,) {
+              private apiService: ApiService) {
     this.apiService.accessToken = localStorage.getItem('accessToken');
   }
 

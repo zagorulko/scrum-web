@@ -10,7 +10,7 @@
       <span flex></span>
     </div>
     <md-nav-list td-sidenav-content>
-      <ng-content select="app-layout-sidenav"></ng-content>
+      <ng-content select="[app-layout-sidenav]"></ng-content>
       <a md-list-item><md-icon md-list-icon>sort</md-icon> All Unreads</a>
       <a md-list-item><md-icon md-list-icon>chat</md-icon> All Threads</a>
       <md-divider></md-divider>
@@ -36,7 +36,7 @@
       <span flex></span>
     </div>
     <md-sidenav-container fullscreen>
-      <ng-content select="app-layout-main"></ng-content>
+      <ng-content select="[app-layout-content]"></ng-content>
     </md-sidenav-container>
   </td-layout-nav-list>
 </td-layout>
