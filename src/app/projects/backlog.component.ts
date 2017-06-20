@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
+import { TdDialogService } from '@covalent/core';
 import { Observable } from 'rxjs';
 
 import { Task, ProjectService } from './project.service';
@@ -20,6 +21,7 @@ export class BacklogComponent {
   reverseOrder: boolean = false;
 
   constructor(private route: ActivatedRoute, private router: Router,
+              private tdDialogService: TdDialogService,
               private projectService: ProjectService) {}
 
   ngOnInit() {
@@ -70,5 +72,13 @@ export class BacklogComponent {
 
     if (this.reverseOrder)
       this.filteredTasks.reverse();
+  }
+
+  removeTask(id: number) {
+    this.tdDialogService.openConfirm({
+      message: 'Are you sure?'
+    }).afterClosed().subscribe(yes => {
+      
+    });
   }
 }

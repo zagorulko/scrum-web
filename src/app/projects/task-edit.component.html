@@ -1,0 +1,24 @@
+<md-card *ngIf="!loading" class="push">
+  <md-card-content>
+    <div layout="row">
+      <md-input-container flex>
+        <input mdInput placeholder="Title" [(ngModel)]="task.title" />
+      </md-input-container>
+    </div>
+    <div layout="row" class="push-top-sm">
+      <md-select placeholder="Status" [(ngModel)]="task.status" flex>
+        <md-option value="BACKLOG">Backlog</md-option>
+        <md-option value="IN_PROGRESS">In progress</md-option>
+      </md-select>
+    </div>
+    <div layout="row" class="push-top">
+      <md-select placeholder="Kind" [(ngModel)]="task.kind" flex>
+        <md-option value="BUG">Bug</md-option>
+        <md-option value="FEATURE">Feature</md-option>
+      </md-select>
+    </div>
+    <!-- <div layout="row" class="push-top"> -->
+      <!-- <md-slider min="-2" max="2" step="1" [(ngModel)]="task.priority" flex></md-slider> -->
+    <!-- </div> -->
+  </md-card-content>
+</md-card>

@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
@@ -13,11 +14,17 @@ export class ProjectComponent {
   project: Project = null;
   sprints: Sprint[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router,
+  constructor(private location: Location,
+              private route: ActivatedRoute, private router: Router,
               private projectService: ProjectService) {}
 
   ngOnInit() {
     this.refresh();
+  }
+
+  goBack() {
+    this.location.back();
+    // this.router.navigate(['/projects']);
   }
 
   refresh() {

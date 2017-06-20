@@ -20,17 +20,21 @@ import {
   MdMenuModule,
   MdSnackBarModule,
   MdGridListModule,
-  MdSelectModule
+  MdSelectModule,
+  MdSliderModule
 } from '@angular/material';
 
 import {
   CovalentCommonModule,
+  CovalentDialogsModule,
   CovalentLayoutModule,
   CovalentMediaModule,
   CovalentMenuModule,
   CovalentNotificationsModule,
   CovalentSearchModule
 } from '@covalent/core';
+
+import { ChartsModule } from 'ng2-charts';
 
 import { BasicLayoutComponent } from './basic-layout.component';
 import { CardLayoutComponent } from './card-layout.component';
@@ -65,6 +69,7 @@ import { SidenavLayoutComponent } from './sidenav-layout.component';
     CovalentMenuModule,
     CovalentNotificationsModule,
     CovalentSearchModule,
+    ChartsModule
   ],
   exports: [
     CommonModule,
@@ -87,12 +92,15 @@ import { SidenavLayoutComponent } from './sidenav-layout.component';
     MdSnackBarModule,
     MdGridListModule,
     MdSelectModule,
+    MdSliderModule,
     CovalentCommonModule,
+    CovalentDialogsModule,
     CovalentLayoutModule,
     CovalentMediaModule,
     CovalentMenuModule,
     CovalentNotificationsModule,
     CovalentSearchModule,
+    ChartsModule,
     BasicLayoutComponent,
     CardLayoutComponent,
     SidenavLayoutComponent

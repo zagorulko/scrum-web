@@ -1,0 +1,54 @@
+<md-card *ngIf="!loading" class="push">
+  <md-card-title>
+    {{task.title}}
+  </md-card-title>
+  <md-card-subtitle>
+    Created {{task.creationDate | date}} by @{{task.author}}
+    <button md-icon-button
+        [routerLink]="['/projects', this.projectAlias, 'backlog', task.id, 'edit']">
+      <md-icon>edit</md-icon>
+    </button>
+  </md-card-subtitle>
+  <md-divider></md-divider>
+  <md-card-content class="push-bottom-none">
+    <h3 class="push-bottom-none">{{comments.length}} comment(s)</h3>
+    <md-list>
+      <div *ngFor="let comment of comments; let last = last">
+        <md-list-item>
+          <md-icon md-list-avatar>face</md-icon>
+          <h3 md-line>@{{comment.author}}</h3>
+          <!-- <span flex="none" class="md-caption tc-grey-600">
+            {{comment.creationDate | date:'medium'}}
+          </span> -->
+          <p md-line>
+            {{comment.message}}
+          </p>
+        </md-list-item>
+        <md-divider *ngIf="!last"></md-divider>
+      </div>
+    </md-list>
+  </md-card-content>
+  <md-divider></md-divider>
+  <md-card-actions>
+    <div layout="row" layout-align="start center">
+        <div>
+          <button md-icon-button mdTooltip="Add content" mdTooltipPosition="after" [mdMenuTriggerFor]="chatMenu"><md-icon>add</md-icon></button>
+          <md-menu #chatMenu="mdMenu">
+            <button md-menu-item>Code or text snippet</button>
+            <button md-menu-item>Google Docs file</button>
+            <button md-menu-item>Post</button>
+            <button md-menu-item>Google Drive</button>
+            <button md-menu-item>Upload file</button>
+          </md-menu>
+        </div>
+        <md-input-container class="push-left push-right" flex layout="row" floatPlaceholder="never">
+          <textarea flex mdInput placeholder="message"></textarea>
+        </md-input-container>
+        <div>
+          <button md-icon-button mdTooltip="Add emoji" mdTooltipPosition="before">
+            <md-icon>send</md-icon>
+          </button>
+        </div>
+      </div>
+  </md-card-actions>
+</md-card>

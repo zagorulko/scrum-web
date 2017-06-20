@@ -1,0 +1,7 @@
+<span [ngSwitch]="value">
+  <span *ngSwitchCase="-2" class="bgc-grey-100">Very low priority</span>
+  <span *ngSwitchCase="-1" class="bgc-yellow-100">Low priority</span>
+  <span *ngSwitchCase="0" class="bgc-blue-100">Normal priority</span>
+  <span *ngSwitchCase="1" class="bgc-orange-300">High priority</span>
+  <span *ngSwitchCase="2" class="bgc-red-300">Very high priority</span>
+</span>

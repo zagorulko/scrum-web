@@ -50,6 +50,13 @@ export class Task {
   onCurrentSprint: boolean;
 };
 
+export class Comment {
+  id: number;
+  creationDate: Date;
+  author: string;
+  message: string;
+};
+
 @Injectable()
 export class ProjectService {
   constructor(private apiService: ApiService) {}
@@ -94,12 +101,7 @@ export class ProjectService {
     return this.apiService
       .get('/projects/' + projectAlias + "/tasks")
       .map(response => response.json()['tasks'])
-      .map(tasks => {
-        for (let i = 0; i < tasks.length; i++) {
-          tasks[i].creationDate = new Date(tasks[i].creationDate);
-        }
-        return tasks;
-      });
+      .map(this.processTasks);
   }
 
   fetchSprint(id): Observable<Sprint> {
@@ -108,9 +110,36 @@ export class ProjectService {
       .map(response => response.json());
   }
 
-  fetchTask(id): Observable<Sprint> {
+  fetchSprintTasks(id): Observable<Task[]> {
+    return this.apiService
+      .get('/sprints/' + id + '/tasks')
+      .map(response => response.json()['tasks'])
+      .map(this.processTasks);
+  }
+
+  fetchTask(id): Observable<Task> {
     return this.apiService
       .get('/tasks/' + id)
       .map(response => response.json());
+  }
+
+  fetchTaskComments(taskId): Observable<Comment[]> {
+    return this.apiService
+      .get('/tasks/' +taskId + '/comments')
+      .map(response => response.json()['comments'])
+      .map(comments => {
+        for (let i = 0; i < comments.length; i++)
+          comments[i].creationDate = new Date(comments[i].creationDate);
+        comments.sort((a, b) =>
+          b.creationDate.getTime() - a.creationDate.getTime()
+        );
+        return comments;
+      });
+  }
+
+  private processTasks(tasks: Task[]): Task[] {
+    for (let i = 0; i < tasks.length; i++)
+      tasks[i].creationDate = new Date(tasks[i].creationDate);
+    return tasks;
   }
 }

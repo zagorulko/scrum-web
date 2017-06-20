@@ -3,16 +3,16 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
-import { Sprint, Task, ProjectService } from './project.service';
+import { Task, Comment, ProjectService } from './project.service';
 
 @Component({
-  templateUrl: 'sprint.component.html'
+  templateUrl: 'task.component.html'
 })
-export class SprintComponent {
+export class TaskComponent {
   loading: boolean = false;
-  projectAlias: string = null;
-  sprint: Sprint = null;
-  sprintTasks: Task[] = null;
+  projectAlias: string;
+  task: Task = null;
+  comments: Comment[] = null;
 
   constructor(private route: ActivatedRoute, private router: Router,
               private projectService: ProjectService) {}
@@ -22,14 +22,14 @@ export class SprintComponent {
     this.route.parent.params.subscribe(params => {
       this.projectAlias = params['id'];
       this.route.params.subscribe(params => {
-        let sprintId = +params['sprintId'];
+        let taskId = +params['taskId'];
         Observable.merge(
           this.projectService
-            .fetchSprint(sprintId)
-            .map(sprint => this.sprint = sprint),
+            .fetchTask(taskId)
+            .map(task => this.task = task),
           this.projectService
-            .fetchSprintTasks(sprintId)
-            .map(tasks => this.sprintTasks = tasks)
+            .fetchTaskComments(taskId)
+            .map(comments => this.comments = comments)
         )
         .finally(() => this.loading = false)
         .subscribe();
