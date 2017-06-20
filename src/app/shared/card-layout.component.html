@@ -1,7 +1,7 @@
 <td-layout>
   <td-navigation-drawer
-      [name]="authService.user.username + ' <' + authService.user.fullName + '>'"
-      [email]="authService.user.email">
+      [name]="authService.profile.username + ' <' + authService.profile.fullName + '>'"
+      [email]="authService.profile.email">
     <app-menu></app-menu>
   </td-navigation-drawer>
   <td-layout-nav [toolbarTitle]="toolbarTitle">

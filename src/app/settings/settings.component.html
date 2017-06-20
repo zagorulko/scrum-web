@@ -1,3 +1,29 @@
 <app-card-layout cardTitle="Settings" cardSubtitle="You can change your profile details here">
-  TODO
+  <div app-layout-content>
+    <md-card-content class="push-bottom-none">
+      <div layout="row">
+        <md-input-container flex>
+          <input mdInput placeholder="Username" [(ngModel)]="username" />
+        </md-input-container>
+      </div>
+      <div layout="row">
+        <md-input-container flex>
+          <input mdInput placeholder="Full name" [(ngModel)]="fullName" />
+        </md-input-container>
+      </div>
+      <div layout="row">
+        <md-input-container flex>
+          <input mdInput placeholder="E-mail" [(ngModel)]="email" />
+        </md-input-container>
+      </div>
+      <div layout="row" class="push-top-sm" *ngIf="errorMessage">
+        <md-error>ERROR: {{errorMessage}}</md-error>
+      </div>
+    </md-card-content>
+    <md-card-actions>
+      <div layout="row">
+        <button flex md-raised-button color="accent" (click)="save()" class="text-upper">Save</button>
+      </div>
+    </md-card-actions>
+  </div>
 </app-card-layout>

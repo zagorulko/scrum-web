@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { ApiService } from './api.service';
 
-export class User {
+export class Profile {
   username: string;
   fullName: string;
   email: string;
@@ -14,7 +14,7 @@ export class User {
 
 @Injectable()
 export class AuthService {
-  user: User = null;
+  profile: Profile = null;
   redirectUrl: string;
 
   constructor(private http: Http, private router: Router,
@@ -23,22 +23,22 @@ export class AuthService {
   }
 
   get isLoggedIn(): boolean {
-    return !!this.user;
+    return !!this.profile;
   }
 
   get maybeLoggedIn(): boolean {
     return !!this.apiService.accessToken;
   }
 
-  fetchUser(): Observable<User> {
-    if (this.user)
-      return Observable.from([this.user]);
+  fetchProfile(): Observable<Profile> {
+    if (this.profile)
+      return Observable.from([this.profile]);
     return this.apiService
-      .get('/user', {})
-      .map(response => this.user = response.json());
+      .get('/profile', {})
+      .map(response => this.profile = response.json());
   }
 
-  login(username: string, password: string): Observable<User> {
+  login(username: string, password: string): Observable<Profile> {
     return this.apiService
       .post('/login', {username, password})
       .map(response => {
@@ -46,13 +46,13 @@ export class AuthService {
         localStorage.setItem('accessToken', accessToken);
         this.apiService.accessToken = accessToken;
       })
-      .flatMap(x => this.fetchUser());
+      .flatMap(x => this.fetchProfile());
   }
 
   logout(): void {
     localStorage.removeItem('accessToken');
     this.apiService.accessToken = null;
-    this.user = null;
+    this.profile = null;
     this.router.navigate(['/login']);
   }
 }

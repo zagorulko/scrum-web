@@ -29,8 +29,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     if (!this.authService.maybeLoggedIn)
       return Observable.from([false]);
     return this.authService
-      .fetchUser()
-      .map(user => true)
+      .fetchProfile()
+      .map(profile => true)
       .catch(error => {
         this.authService.redirectUrl = url;
         this.router.navigate(['/login']);

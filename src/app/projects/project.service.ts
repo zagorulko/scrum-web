@@ -39,7 +39,7 @@ export class ProjectService {
 
   fetchProjectList(): Observable<Project[]> {
     return this.apiService
-      .get('/user/projects')
+      .get('/projects')
       .map(response => response.json()['projects']);
   }
 
