@@ -21,7 +21,14 @@
       <md-list>
         <div *ngFor="let task of tasks; let last = last">
           <md-list-item class="cursor-pointer">
-            <h3 md-line>{{task.title}}</h3>
+            <h3 md-line>{{task.title}}
+            </h3>
+            <span flex="none" class="md-caption tc-grey-600">{{task.creationDate | date:'medium'}}</span>
+            <p md-line>
+              {{task.status}} |
+              {{task.kind}} |
+              Priority: {{task.priority}}
+            </p>
           </md-list-item>
         <md-divider *ngIf="!last"></md-divider>
         </div>

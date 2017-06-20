@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
-import { Project, Sprint, Task, ProjectService } from './project.service';
+import { Task, ProjectService } from './project.service';
 
 @Component({
   templateUrl: 'backlog.component.html'
@@ -11,7 +11,7 @@ import { Project, Sprint, Task, ProjectService } from './project.service';
 export class BacklogComponent {
   loading: boolean = false;
   projectAlias: string = null;
-  tasks: Task[] = [];
+  tasks: Task[] = null;
   assignedToMeOnly: boolean = false;
   currentSprintOnly: boolean = true;
   uncompletedOnly: boolean = false;

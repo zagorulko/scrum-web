@@ -4,6 +4,12 @@ import { Observable } from 'rxjs';
 
 import { ApiService } from '../api.service';
 
+export class User {
+  username: string;
+  fullName: string;
+  email: string;
+};
+
 export class Project {
   alias: string;
   name: string;
@@ -27,10 +33,19 @@ export class Task {
   parentTask: number;
   author: string;
   title: string;
-  creationDate: string;
+  creationDate: Date;
   status: string;
   kind: string;
   priority: number;
+  acceptanceCriteria: string;
+  userStory: string;
+  initialEstimate: number;
+  vcsCommit: string;
+  btsTicket: string;
+  completionDate: Date;
+  timeSpent: number;
+  effort: number;
+  assignees: User[];
 };
 
 @Injectable()
@@ -47,6 +62,12 @@ export class ProjectService {
     return this.apiService
       .get('/projects/' + alias)
       .map(response => response.json());
+  }
+
+  fetchProjectMembers(projectAlias): Observable<User[]> {
+    return this.apiService
+      .get('/projects/' + projectAlias + "/members")
+      .map(response => response.json()['members']);
   }
 
   fetchProjectSprints(projectAlias): Observable<Sprint[]> {
@@ -70,7 +91,13 @@ export class ProjectService {
   fetchProjectTasks(projectAlias): Observable<Task[]> {
     return this.apiService
       .get('/projects/' + projectAlias + "/tasks")
-      .map(response => response.json()['tasks']);
+      .map(response => response.json()['tasks'])
+      .map(tasks => {
+        for (let i = 0; i < tasks.length; i++) {
+          tasks[i].creationDate = new Date(tasks[i].creationDate);
+        }
+        return tasks;
+      });
   }
 
   fetchSprint(id): Observable<Sprint> {
