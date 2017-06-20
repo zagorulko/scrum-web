@@ -46,6 +46,8 @@ export class Task {
   timeSpent: number;
   effort: number;
   assignees: User[];
+  assignedToMe: boolean;
+  onCurrentSprint: boolean;
 };
 
 @Injectable()

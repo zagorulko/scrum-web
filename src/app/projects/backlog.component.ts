@@ -12,9 +12,10 @@ export class BacklogComponent {
   loading: boolean = false;
   projectAlias: string = null;
   tasks: Task[] = null;
-  assignedToMeOnly: boolean = false;
-  currentSprintOnly: boolean = true;
-  uncompletedOnly: boolean = false;
+  filteredTasks: Task[] = null;
+  assignedToMeOnly: boolean = true;
+  onCurrentSprintOnly: boolean = false;
+  uncompletedOnly: boolean = true;
   orderBy: string = 'date';
   reverseOrder: boolean = false;
 
@@ -27,9 +28,47 @@ export class BacklogComponent {
       this.projectAlias = params['id'];
       this.projectService
         .fetchProjectTasks(this.projectAlias)
-        .map(tasks => this.tasks = tasks)
+        .map(tasks => {
+          this.tasks = tasks;
+          this.applyFilters();
+        })
         .finally(() => this.loading = false)
         .subscribe();
     });
+  }
+
+  toggleOrder() {
+    this.reverseOrder = !this.reverseOrder;
+    this.applyFilters();
+  }
+
+  applyFilters() {
+    this.filteredTasks = [];
+    for (let i = 0; i  < this.tasks.length; i++) {
+      let task = this.tasks[i];
+      if (this.assignedToMeOnly && !task.assignedToMe)
+        continue;
+      if (this.onCurrentSprintOnly && !task.onCurrentSprint)
+        continue;
+      if (this.uncompletedOnly && task.status == 'DONE')
+        continue;
+      this.filteredTasks.push(task);
+    }
+
+    switch (this.orderBy) {
+    case 'date':
+      this.filteredTasks.sort((a, b) =>
+        b.creationDate.getTime() - a.creationDate.getTime());
+      break;
+    case 'title':
+      this.filteredTasks.sort((a, b) => a.title.localeCompare(b.title));
+      break;
+    case 'priority':
+      this.filteredTasks.sort((a, b) => b.priority - a.priority);
+      break;
+    }
+
+    if (this.reverseOrder)
+      this.filteredTasks.reverse();
   }
 }
