@@ -7,7 +7,7 @@ import { BacklogComponent } from './backlog.component';
 import { MembersComponent } from './members.component';
 import { ProjectComponent } from './project.component';
 import { ProjectListComponent } from './project-list.component';
-import { SprintComponent } from './sprint.component';
+import { ReportComponent } from './report.component';
 import { TaskComponent } from './task.component';
 import { TaskEditComponent } from './task-edit.component';
 
@@ -20,7 +20,7 @@ const projectsRoutes: Routes = [
       { path: 'backlog/:taskId', component: TaskComponent, pathMatch: 'full' },
       { path: 'backlog/:taskId/edit', component: TaskEditComponent },
       { path: 'members', component: MembersComponent },
-      { path: 'sprints/:sprintId', component: SprintComponent }
+      { path: 'reports/:sprintId', component: ReportComponent }
     ]
   }
 ];

@@ -23,9 +23,9 @@
       <md-icon md-list-icon>people</md-icon>Members
     </a>
     <md-divider></md-divider>
-    <h3 md-subheader>SPRINTS ({{sprints.length}})</h3>
+    <h3 md-subheader>SPRINT REPORTS ({{sprints.length}})</h3>
     <a md-list-item *ngFor="let sprint of sprints; let i = index"
-        [routerLink]="['/projects', project.alias, 'sprints', sprint.id]"
+        [routerLink]="['/projects', project.alias, 'reports', sprint.id]"
         routerLinkActive="md-list-item-active">
       <md-icon md-list-icon>#</md-icon>
       <h3 md-line>Sprint #{{sprint.number}}</h3>

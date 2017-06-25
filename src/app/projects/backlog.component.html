@@ -1,18 +1,13 @@
 <div layout="column" layout-fill class="md-content">
   <md-toolbar class="md-whiteframe-z1">
-    <h6>
-      <md-checkbox [(ngModel)]="assignedToMeOnly" (change)="applyFilters()">
-        Assigned to me
-      </md-checkbox>
-    </h6>
-    <h6 class="push-left">
-      <md-checkbox [(ngModel)]="onCurrentSprintOnly" (change)="applyFilters()">
-        On current sprint
-      </md-checkbox>
-    </h6>
-    <h6 class="push-left">
+    <h6 >
       <md-checkbox [(ngModel)]="uncompletedOnly" (change)="applyFilters()">
         Uncompleted
+      </md-checkbox>
+    </h6>
+    <h6 class="push-left">
+      <md-checkbox [(ngModel)]="assignedToMeOnly" (change)="applyFilters()">
+        Assigned to me
       </md-checkbox>
     </h6>
     <h6 class="push-left">

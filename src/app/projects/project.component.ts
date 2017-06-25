@@ -37,7 +37,7 @@ export class ProjectComponent {
           .map(project => this.project = project),
         this.projectService
           .fetchProjectSprints(projectAlias)
-          .map(sprints => this.sprints = sprints)
+          .map(sprints => this.sprints = sprints.reverse())
       )
       .finally(() => this.loading = false)
       .subscribe();

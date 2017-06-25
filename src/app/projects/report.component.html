@@ -1,0 +1,24 @@
+<md-card *ngIf="!loading" class="push">
+  <md-card-title>
+    Burndown chart for Sprint #{{sprint.number}} ({{sprint.startDate | date}} - {{sprint.endDate | date}})
+  </md-card-title>
+  <md-divider></md-divider>
+  <md-card-content>
+    <div style="height:250px;">
+      <ngx-charts-line-chart
+        [scheme]="{domain: ['#ff0000', '#03A9F4', '#FFA726', '#FFCC80']}"
+        [results]="chartData"
+        [gradient]="true"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="false"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        xAxisLabel="Time"
+        yAxisLabel="Tasks left"
+        [autoScale]="true"
+        [yAxisTickFormatting]="axisDigits">
+      </ngx-charts-line-chart>
+    </div>
+  </md-card-content>
+</md-card>

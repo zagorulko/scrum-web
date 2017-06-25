@@ -9,7 +9,7 @@ import { ProjectComponent } from './project.component';
 import { ProjectListComponent } from './project-list.component';
 import { ProjectService } from './project.service';
 import { ProjectsRoutingModule } from './projects-routing.module';
-import { SprintComponent } from './sprint.component';
+import { ReportComponent } from './report.component';
 import { TaskComponent } from './task.component';
 import { TaskEditComponent } from './task-edit.component';
 
@@ -24,7 +24,7 @@ import { TaskEditComponent } from './task-edit.component';
     PriorityOutputComponent,
     ProjectComponent,
     ProjectListComponent,
-    SprintComponent,
+    ReportComponent,
     TaskComponent,
     TaskEditComponent
   ],

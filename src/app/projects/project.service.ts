@@ -17,6 +17,7 @@ export class Project {
   vcsLink: string;
   btsLink: string;
   cisLink: string;
+  currentSprint: number;
 };
 
 export class Sprint {
@@ -26,6 +27,12 @@ export class Sprint {
   endDate: Date;
   goal: string;
 };
+
+export class BurndownPoint {
+  date: Date;
+  actually_left: number;
+  should_be_left: number;
+}
 
 export class Task {
   id: number;
@@ -47,7 +54,6 @@ export class Task {
   effort: number;
   assignees: User[];
   assignedToMe: boolean;
-  onCurrentSprint: boolean;
 };
 
 export class Comment {
@@ -88,11 +94,6 @@ export class ProjectService {
           sprints[i].startDate = new Date(sprints[i].startDate);
           sprints[i].endDate = new Date(sprints[i].endDate);
         }
-        sprints.sort((a: Sprint, b: Sprint) =>
-            b.startDate.getTime() - a.startDate.getTime()
-        )
-        for (let i = 0; i < sprints.length; i++)
-          sprints[i].number = sprints.length - i;
         return sprints;
       });
   }
@@ -101,7 +102,11 @@ export class ProjectService {
     return this.apiService
       .get('/projects/' + projectAlias + "/tasks")
       .map(response => response.json()['tasks'])
-      .map(this.processTasks);
+      .map(tasks => {
+        for (let i = 0; i < tasks.length; i++)
+          tasks[i].creationDate = new Date(tasks[i].creationDate);
+        return tasks;
+      });
   }
 
   fetchSprint(id): Observable<Sprint> {
@@ -114,7 +119,22 @@ export class ProjectService {
     return this.apiService
       .get('/sprints/' + id + '/tasks')
       .map(response => response.json()['tasks'])
-      .map(this.processTasks);
+      .map(tasks => {
+        for (let i = 0; i < tasks.length; i++)
+          tasks[i].creationDate = new Date(tasks[i].creationDate);
+        return tasks;
+      });
+  }
+
+  fetchSprintBurndown(id): Observable<BurndownPoint[]> {
+    return this.apiService
+      .get('/sprints/' + id + '/burndown')
+      .map(response => response.json()['burndown'])
+      .map(burndown => {
+        for (let i = 0; i < burndown.length; i++)
+          burndown[i].date = new Date(burndown[i].date);
+        return burndown;
+      });
   }
 
   fetchTask(id): Observable<Task> {
@@ -130,16 +150,7 @@ export class ProjectService {
       .map(comments => {
         for (let i = 0; i < comments.length; i++)
           comments[i].creationDate = new Date(comments[i].creationDate);
-        comments.sort((a, b) =>
-          b.creationDate.getTime() - a.creationDate.getTime()
-        );
         return comments;
       });
-  }
-
-  private processTasks(tasks: Task[]): Task[] {
-    for (let i = 0; i < tasks.length; i++)
-      tasks[i].creationDate = new Date(tasks[i].creationDate);
-    return tasks;
   }
 }

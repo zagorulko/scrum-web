@@ -15,7 +15,6 @@ export class BacklogComponent {
   tasks: Task[] = null;
   filteredTasks: Task[] = null;
   assignedToMeOnly: boolean = true;
-  onCurrentSprintOnly: boolean = false;
   uncompletedOnly: boolean = true;
   orderBy: string = 'date';
   reverseOrder: boolean = false;
@@ -48,11 +47,9 @@ export class BacklogComponent {
     this.filteredTasks = [];
     for (let i = 0; i  < this.tasks.length; i++) {
       let task = this.tasks[i];
-      if (this.assignedToMeOnly && !task.assignedToMe)
-        continue;
-      if (this.onCurrentSprintOnly && !task.onCurrentSprint)
-        continue;
       if (this.uncompletedOnly && task.status == 'DONE')
+        continue;
+      if (this.assignedToMeOnly && !task.assignedToMe)
         continue;
       this.filteredTasks.push(task);
     }
@@ -78,7 +75,7 @@ export class BacklogComponent {
     this.tdDialogService.openConfirm({
       message: 'Are you sure?'
     }).afterClosed().subscribe(yes => {
-      
+
     });
   }
 }
