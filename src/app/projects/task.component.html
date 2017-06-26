@@ -16,11 +16,8 @@
       <div *ngFor="let comment of comments; let last = last">
         <md-list-item>
           <md-icon md-list-avatar>face</md-icon>
-          <h3 md-line>@{{comment.author}}</h3>
-          <!-- <span flex="none" class="md-caption tc-grey-600">
-            {{comment.creationDate | date:'medium'}}
-          </span> -->
-          <p md-line>
+          <h3 md-line class="tc-grey-500">@{{comment.author}} on {{comment.creationDate | date:'medium'}}</h3>
+          <p md-line style="white-space: normal; color: black">
             {{comment.message}}
           </p>
         </md-list-item>
@@ -32,20 +29,15 @@
   <md-card-actions>
     <div layout="row" layout-align="start center">
         <div>
-          <button md-icon-button mdTooltip="Add content" mdTooltipPosition="after" [mdMenuTriggerFor]="chatMenu"><md-icon>add</md-icon></button>
-          <md-menu #chatMenu="mdMenu">
-            <button md-menu-item>Code or text snippet</button>
-            <button md-menu-item>Google Docs file</button>
-            <button md-menu-item>Post</button>
-            <button md-menu-item>Google Drive</button>
-            <button md-menu-item>Upload file</button>
-          </md-menu>
+          <button md-icon-button>
+            <md-icon>attach_file</md-icon>
+          </button>
         </div>
         <md-input-container class="push-left push-right" flex layout="row" floatPlaceholder="never">
-          <textarea flex mdInput placeholder="message"></textarea>
+          <textarea flex mdInput placeholder="Message" [(ngModel)]="message"></textarea>
         </md-input-container>
         <div>
-          <button md-icon-button mdTooltip="Add emoji" mdTooltipPosition="before">
+          <button md-icon-button (click)="sendMessage()" [disabled]="sending">
             <md-icon>send</md-icon>
           </button>
         </div>

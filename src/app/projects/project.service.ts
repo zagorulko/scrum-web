@@ -153,4 +153,10 @@ export class ProjectService {
         return comments;
       });
   }
+
+  postTaskComment(taskId, message): Observable<number> {
+    return this.apiService
+      .post('/tasks/' +taskId + '/comments', {message})
+      .map(response => response.json()['id']);
+  }
 }

@@ -14,8 +14,8 @@ export class BacklogComponent {
   projectAlias: string = null;
   tasks: Task[] = null;
   filteredTasks: Task[] = null;
-  assignedToMeOnly: boolean = true;
   uncompletedOnly: boolean = true;
+  assignedToMeOnly: boolean = false;
   orderBy: string = 'date';
   reverseOrder: boolean = false;
 

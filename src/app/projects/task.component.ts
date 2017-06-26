@@ -13,6 +13,8 @@ export class TaskComponent {
   projectAlias: string;
   task: Task = null;
   comments: Comment[] = null;
+  sending: boolean = false;
+  message: string = '';
 
   constructor(private route: ActivatedRoute, private router: Router,
               private projectService: ProjectService) {}
@@ -35,5 +37,20 @@ export class TaskComponent {
         .subscribe();
       })
     });
+  }
+
+  sendMessage() {
+    if (this.sending)
+      return;
+    this.sending = true;
+    Observable.merge(
+      this.projectService
+        .postTaskComment(this.task.id, this.message),
+      this.projectService
+        .fetchTaskComments(this.task.id)
+        .map(comments => this.comments = comments)
+    )
+    .finally(() => this.sending = false)
+    .subscribe(ok => this.message = '');
   }
 }
