@@ -51,6 +51,7 @@ export class BacklogComponent {
         continue;
       if (this.assignedToMeOnly && !task.assignedToMe)
         continue;
+      task['baseIndex'] = i;
       this.filteredTasks.push(task);
     }
 
@@ -71,11 +72,21 @@ export class BacklogComponent {
       this.filteredTasks.reverse();
   }
 
-  removeTask(id: number) {
+  removeTask(i: number) {
+    let task = this.tasks[i];
     this.tdDialogService.openConfirm({
-      message: 'Are you sure?'
+      title: task.title,
+      message: 'Are you sure you want to delete the task?',
+      acceptButton: 'Delete'
     }).afterClosed().subscribe(yes => {
-
+      if (yes) {
+        this.projectService
+          .deleteTask(task.id)
+          .subscribe(ok => {
+            this.tasks.splice(i, 1);
+            this.applyFilters();
+          });
+      }
     });
   }
 }

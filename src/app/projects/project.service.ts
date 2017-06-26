@@ -143,6 +143,12 @@ export class ProjectService {
       .map(response => response.json());
   }
 
+  deleteTask(id): Observable<any> {
+    return this.apiService
+      .delete('/tasks/' + id)
+      .map(response => response.json());
+  }
+
   fetchTaskComments(taskId): Observable<Comment[]> {
     return this.apiService
       .get('/tasks/' +taskId + '/comments')

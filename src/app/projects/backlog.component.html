@@ -26,7 +26,7 @@
   <div class="md-content" flex cdkScrollable>
     <md-card class="push-sm">
       <md-list>
-        <div *ngFor="let task of filteredTasks; let last = last">
+        <div *ngFor="let task of filteredTasks; let i = index; let last = last">
           <md-list-item>
             <h3 md-line> {{task.title}}</h3>
             <span flex="none" class="md-caption tc-grey-600">
@@ -39,7 +39,7 @@
                   [routerLink]="['/projects', this.projectAlias, 'backlog', task.id, 'edit']">
                 <md-icon>edit</md-icon>
               </button>
-              <button md-icon-button (click)="removeTask(task.id)">
+              <button md-icon-button (click)="removeTask(task['baseIndex'])">
                 <md-icon>delete</md-icon>
               </button>
             </span>
