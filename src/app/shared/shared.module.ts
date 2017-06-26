@@ -33,6 +33,7 @@ import {
   CovalentNotificationsModule,
   CovalentSearchModule
 } from '@covalent/core';
+import { CovalentDynamicFormsModule } from '@covalent/dynamic-forms';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
@@ -69,6 +70,7 @@ import { SidenavLayoutComponent } from './sidenav-layout.component';
     CovalentMenuModule,
     CovalentNotificationsModule,
     CovalentSearchModule,
+    CovalentDynamicFormsModule,
     NgxChartsModule
   ],
   exports: [
@@ -100,6 +102,7 @@ import { SidenavLayoutComponent } from './sidenav-layout.component';
     CovalentMenuModule,
     CovalentNotificationsModule,
     CovalentSearchModule,
+    CovalentDynamicFormsModule,
     NgxChartsModule,
     BasicLayoutComponent,
     CardLayoutComponent,

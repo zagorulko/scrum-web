@@ -143,6 +143,12 @@ export class ProjectService {
       .map(response => response.json());
   }
 
+  updateTask(id, d): Observable<any> {
+    return this.apiService
+      .put('/tasks/' + id, d)
+      .map(response => response.json());
+  }
+
   deleteTask(id): Observable<any> {
     return this.apiService
       .delete('/tasks/' + id)

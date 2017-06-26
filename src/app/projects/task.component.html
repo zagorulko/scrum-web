@@ -4,11 +4,34 @@
   </md-card-title>
   <md-card-subtitle>
     Created {{task.creationDate | date}} by @{{task.author}}
-    <button md-icon-button
-        [routerLink]="['/projects', this.projectAlias, 'backlog', task.id, 'edit']">
-      <md-icon>edit</md-icon>
-    </button>
   </md-card-subtitle>
+  <md-divider></md-divider>
+  <md-card-content class="push-bottom-none">
+    <div><app-priority-output [value]="task.priority"></app-priority-output></div>
+    <div>Status: <strong>{{task.status}}</strong></div>
+    <div>Kind: <strong>{{task.kind}}</strong></div>
+    <div *ngIf="task.completionDate">Completed on: <strong>{{task.completionDate | date:'medium'}}</strong></div>
+    <div *ngIf="task.timeSpent">Time spent: <strong>{{task.timeSpent}}</strong></div>
+    <div *ngIf="task.effort">Effort: <strong>{{task.effort}}</strong></div>
+    <div *ngIf="task.vcsCommit">VCS commit: <strong>{{task.vcsCommit}}</strong></div>
+    <div *ngIf="task.btsTicket">Bugtracker ticket: <strong>#{{task.btsTicket}}</strong></div>
+    <div *ngIf="task.assignees">
+      Assigned to:
+      <strong>
+        <span *ngFor="let user of task.assignees; let last = last">
+          @{{user.username}} ({{user.fullName}})<span *ngIf="!last">, </span>
+        </span>
+      </strong>
+    </div>
+    <div *ngIf="task.acceptanceCriteria" class="push-top">
+      <div><em>Acceptance criteria</em></div>
+      <div>{{task.acceptanceCriteria}}</div>
+    </div>
+    <div *ngIf="task.userStory" class="push-top">
+      <div><em>User story</em></div>
+      <div>{{task.userStory}}</div>
+    </div>
+  </md-card-content>
   <md-divider></md-divider>
   <md-card-content class="push-bottom-none">
     <h3 class="push-bottom-none">{{comments.length}} comment(s)</h3>
