@@ -4,6 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 
 import { BacklogComponent } from './backlog.component';
 import { MembersComponent } from './members.component';
+import { NewTaskDialogComponent } from './new-task-dialog.component';
 import { PriorityOutputComponent } from './priority-output.component';
 import { ProjectComponent } from './project.component';
 import { ProjectListComponent } from './project-list.component';
@@ -21,6 +22,7 @@ import { TaskEditComponent } from './task-edit.component';
   declarations: [
     BacklogComponent,
     MembersComponent,
+    NewTaskDialogComponent,
     PriorityOutputComponent,
     ProjectComponent,
     ProjectListComponent,
@@ -30,6 +32,9 @@ import { TaskEditComponent } from './task-edit.component';
   ],
   providers: [
     ProjectService
+  ],
+  entryComponents: [
+    NewTaskDialogComponent
   ]
 })
 export class ProjectsModule { }

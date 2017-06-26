@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { TdDialogService } from '@covalent/core';
 import { Observable } from 'rxjs';
 
+import { NewTaskDialogComponent } from './new-task-dialog.component';
 import { Task, ProjectService } from './project.service';
 
 @Component({
@@ -21,7 +23,8 @@ export class BacklogComponent {
 
   constructor(private route: ActivatedRoute, private router: Router,
               private tdDialogService: TdDialogService,
-              private projectService: ProjectService) {}
+              private projectService: ProjectService,
+              private dialog: MdDialog) {}
 
   ngOnInit() {
     this.loading = true;
@@ -87,6 +90,17 @@ export class BacklogComponent {
             this.applyFilters();
           });
       }
+    });
+  }
+
+  newTask() {
+    let dialogRef = this.dialog.open(NewTaskDialogComponent, {
+      data: {
+        projectAlias: this.projectAlias
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
     });
   }
 }

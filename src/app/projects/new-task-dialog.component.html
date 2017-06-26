@@ -1,0 +1,9 @@
+<h2 md-dialog-title>New task</h2>
+<md-dialog-content>
+  <td-dynamic-forms [elements]="formElements">
+  </td-dynamic-forms>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button md-dialog-close>Cancel</button>
+  <button md-button color="accent" (click)="save()">Save</button>
+</md-dialog-actions>

@@ -54,7 +54,8 @@
       </md-list>
     </md-card>
   </div>
-  <a md-fab color="accent" class="mat-fab-bottom-right fixed fab-pad push" *ngIf="!loading">
+  <a md-fab color="accent" class="mat-fab-bottom-right fixed fab-pad push"
+      *ngIf="!loading" (click)="newTask()">
     <md-icon>add</md-icon>
   </a>
 </div>
